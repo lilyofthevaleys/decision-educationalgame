@@ -9,7 +9,6 @@ export const scenariosData = {
       character_context: {
         student: "You're leading the committee for a school competition",
         teacher: "You're organizing a district educational event",
-        mayor: "You're approving funding for a city youth program",
         entrepreneur: "You're seeking funding for your startup"
       },
       description: "A sponsor offers 5 million rupiah for prizes but demands their name be mentioned in every announcement, video, and social media post. They want prominent logo placement everywhere.",
@@ -55,7 +54,6 @@ export const scenariosData = {
       character_context: {
         student: "You're at an all-you-can-eat buffet with friends",
         teacher: "You're organizing a teacher appreciation dinner",
-        mayor: "You're attending a government banquet",
         entrepreneur: "You're at a networking dinner event"
       },
       description: "The buffet has amazing food, and you've already eaten a lot. There's still a mountain of food on your plate, but you're full. Your friends encourage you to just leave it.",
@@ -101,7 +99,6 @@ export const scenariosData = {
       character_context: {
         student: "You're helping select new club members",
         teacher: "You're choosing students for a scholarship program",
-        mayor: "You're hiring for a government position",
         entrepreneur: "You're hiring for your company"
       },
       description: "Your cousin needs this spot desperately. They're qualified, but there's another candidate who's slightly better. Your family expects you to help. They've helped you before.",
@@ -147,7 +144,6 @@ export const scenariosData = {
       character_context: {
         student: "Your friend offers you leaked exam answers the night before",
         teacher: "You discover a student has exam answers ahead of time",
-        mayor: "Someone offers you insider information on a competitive bid",
         entrepreneur: "A contact offers confidential competitor information"
       },
       description: "Tomorrow's exam determines your final grade. A friend has the questions from someone in the administration office. They're sharing with a small group. 'Everyone's doing it,' they say.",
@@ -193,7 +189,6 @@ export const scenariosData = {
       character_context: {
         student: "You're building a project for a competition",
         teacher: "You're overseeing a school construction project",
-        mayor: "You're approving a public building project",
         entrepreneur: "You're constructing your business facility"
       },
       description: "The contractor offers to finish 2 months early and 30% under budget by using cheaper materials that still 'meet most standards.' They suggest a personal 'thank you' payment of 50 million rupiah to you for approving it.",
@@ -239,7 +234,6 @@ export const scenariosData = {
       character_context: {
         student: "You're buying lunch at the campus cafeteria",
         teacher: "You're organizing a school event with 200 people",
-        mayor: "You're deciding on city-wide plastic policy",
         entrepreneur: "You're choosing packaging for your product"
       },
       description: "The vendor automatically gives you plastic bags and single-use containers. You have a reusable bag in your backpack. No one else is asking for alternatives. It's easier to just take the plastic.",
@@ -285,7 +279,6 @@ export const scenariosData = {
       character_context: {
         student: "A friend asks you to vouch for them in a club application",
         teacher: "A struggling student asks for a strong recommendation they don't deserve",
-        mayor: "A donor asks you to recommend their unqualified relative for a position",
         entrepreneur: "An investor asks you to give a positive reference for their friend"
       },
       description: "Someone you know needs a strong recommendation. They're counting on you. Problem: they're not actually qualified. They made mistakes you witnessed. Writing a glowing letter would be dishonest, but refusing could hurt them badly.",
@@ -331,7 +324,6 @@ export const scenariosData = {
       character_context: {
         student: "You witness something problematic at school",
         teacher: "You see misleading information being shared about your school",
-        mayor: "False information about a city project goes viral",
         entrepreneur: "Fake news about your company spreads online"
       },
       description: "A video goes viral showing something that looks bad but lacks full context. You were there. You know the real story is more nuanced. Clarifying might make you unpopular. Staying silent lets misinformation spread.",
@@ -377,7 +369,6 @@ export const scenariosData = {
       character_context: {
         student: "Your group project leader demands everyone work through the night",
         teacher: "Administration pressures you to give extra unpaid hours",
-        mayor: "Your staff needs to work unpaid overtime to meet a deadline",
         entrepreneur: "You need your team to work weekends without extra pay"
       },
       description: "A crucial deadline approaches. Your superior 'suggests' everyone work unpaid overtime, including weekends. They imply future opportunities depend on 'team players.' Others comply quietly. You're exhausted and this feels exploitative.",
@@ -423,7 +414,6 @@ export const scenariosData = {
       character_context: {
         student: "You're deciding how to spend student organization funds",
         teacher: "You're allocating a limited school budget",
-        mayor: "You're deciding between two critical city projects with limited budget",
         entrepreneur: "You're choosing between employee welfare and business expansion"
       },
       description: "You control 500 million rupiah in public funds. Option A: Visible project (new building facade) that looks good for photos and pleases donors. Option B: Invisible but critical infrastructure (plumbing, electrical) that truly helps people. You need donor support for future funding.",
@@ -469,7 +459,6 @@ export const scenariosData = {
       character_context: {
         student: "You're driving home after a long day",
         teacher: "You're rushing to get to school on time",
-        mayor: "You're in your official vehicle going to a meeting",
         entrepreneur: "You're driving to an important client meeting"
       },
       description: "Traffic is terrible. You're late. There's a motorcycle lane that's completely empty. No cameras, no police. Everyone else is stuck in the car lane. You could easily slip into the motorcycle lane and save 20 minutes.",
@@ -515,7 +504,6 @@ export const scenariosData = {
       character_context: {
         student: "You discovered someone is cheating the system in your organization",
         teacher: "You know a colleague is manipulating student grades for money",
-        mayor: "You have evidence of corruption in your own department",
         entrepreneur: "You discovered your business partner is doing something illegal"
       },
       description: "You have concrete evidence of serious wrongdoing. If you report it, the investigation could expose you as the source. The wrongdoer is well-connected and vindictive. But people are being harmed by their actions every day.",
@@ -561,7 +549,6 @@ export const scenariosData = {
       character_context: {
         student: "You're working part-time at a store",
         teacher: "You're organizing a school canteen",
-        mayor: "You're inspecting a public market",
         entrepreneur: "You're managing inventory in your business"
       },
       description: "You find products that expired yesterday. Your supervisor says to just change the date stickers - they're only one day past, perfectly safe, and throwing them away wastes money. No one will know. But policy says expired products must be discarded.",
@@ -607,7 +594,6 @@ export const scenariosData = {
       character_context: {
         student: "Someone offers to sell you a professional certification without taking the exam",
         teacher: "A service offers fake teaching credentials to help you get promoted",
-        mayor: "You're offered forged credentials for a position requirement",
         entrepreneur: "A vendor offers fake quality certifications for your products"
       },
       description: "You need a specific certification for advancement. The exam is expensive and time-consuming. Someone offers you a 'guaranteed pass' service - they have someone take the exam for you, or they sell certificates that look identical to real ones. Many people you know have done it.",
@@ -653,7 +639,6 @@ export const scenariosData = {
       character_context: {
         student: "Your campus has unlimited water for dorms",
         teacher: "Your school has water conservation issues",
-        mayor: "You're implementing city water policy",
         entrepreneur: "Your business uses significant water resources"
       },
       description: "There's a regional water shortage. Authorities ask everyone to reduce consumption voluntarily. There's no monitoring, no penalties. Your neighbors keep watering lawns and washing cars daily. You could save water, but will your small effort matter if others don't?",
@@ -699,7 +684,6 @@ export const scenariosData = {
       character_context: {
         student: "Your group project had one person do all the work",
         teacher: "You're grading a group project with unequal contributions",
-        mayor: "Your team completed a project but contributions were unequal",
         entrepreneur: "A major client project was completed mostly by one team member"
       },
       description: "Your group project is done. One person did 80% of the work while three others barely contributed. Now everyone gets the same grade and credit. The hard worker says nothing, not wanting to cause drama. You could stay silent or speak up.",
@@ -745,7 +729,6 @@ export const scenariosData = {
       character_context: {
         student: "You're waiting in a long line at the campus cafeteria",
         teacher: "You're in a queue at a government office",
-        mayor: "You're waiting for a public service",
         entrepreneur: "You're in line at a busy business center"
       },
       description: "You've been waiting in line for 45 minutes. Someone you know walks up and asks if they can 'quickly join' you because they're in a rush. Everyone's in a rush. The people behind you are watching to see what you do.",
@@ -791,7 +774,6 @@ export const scenariosData = {
       character_context: {
         student: "You have access to personal data from a survey you conducted",
         teacher: "You have student information that could be valuable to researchers",
-        mayor: "You have access to citizen data that a company wants to buy",
         entrepreneur: "Your app collects user data that advertisers will pay for"
       },
       description: "You have access to personal data from hundreds of people who agreed to one purpose. Now someone offers good money for that data for a different purpose. The data is anonymized. Users will never know. But they didn't consent to this use.",
@@ -837,7 +819,6 @@ export const scenariosData = {
       character_context: {
         student: "You're managing funds for a student charity drive",
         teacher: "You're handling donations for a school fundraiser",
-        mayor: "You're overseeing disaster relief funds",
         entrepreneur: "You're managing a corporate social responsibility budget"
       },
       description: "You raised 100 million rupiah for charity. 15 million is left over after the project ends. You could donate it all to the cause, but organizational costs were high and you weren't paid for hundreds of hours of work. Nobody's tracking the final accounting closely.",
@@ -883,7 +864,6 @@ export const scenariosData = {
       character_context: {
         student: "There's an emergency evacuation at your campus",
         teacher: "Your school faces a sudden crisis situation",
-        mayor: "A disaster strikes your city with limited resources",
         entrepreneur: "Your business faces a critical emergency"
       },
       description: "A crisis hits. Resources are limited. You can save 10 people immediately using official procedures, or risk bending rules to possibly save 15 people. The 'safe' choice guarantees 10 lives. The risky choice might save more or might fail completely, potentially costing lives.",

@@ -34,7 +34,6 @@ interface GameChoice {
 const characterNames: Record<string, string> = {
   student: 'Student',
   teacher: 'Teacher',
-  mayor: 'Mayor',
   entrepreneur: 'Entrepreneur',
 };
 
@@ -73,12 +72,7 @@ function App() {
     setCurrentScreen('intro');
   };
 
-  const handleSkipCharacter = () => {
-    const randomCharacters = ['student', 'teacher', 'mayor', 'entrepreneur'];
-    const randomChar = randomCharacters[Math.floor(Math.random() * randomCharacters.length)];
-    setSelectedCharacter(randomChar);
-    setCurrentScreen('intro');
-  };
+  
 
   const handleBegin = () => {
     setCurrentScreen('scenario');
@@ -174,9 +168,7 @@ function App() {
     setCurrentScreen('results');
   };
 
-  const handleSkipReflections = () => {
-    setCurrentScreen('results');
-  };
+  
 
   const handleExit = () => {
     setShowExitModal(true);
@@ -208,7 +200,7 @@ function App() {
       {currentScreen === 'landing' && <LandingPage onStart={handleStart} />}
 
       {currentScreen === 'character-selection' && (
-        <CharacterSelection onSelect={handleCharacterSelect} onSkip={handleSkipCharacter} />
+        <CharacterSelection onSelect={handleCharacterSelect} />
       )}
 
       {currentScreen === 'intro' && (
@@ -243,7 +235,6 @@ function App() {
       {currentScreen === 'reflection' && (
         <ReflectionScreen
           onSaveAndDownload={handleSaveReflections}
-          onSkip={handleSkipReflections}
         />
       )}
 

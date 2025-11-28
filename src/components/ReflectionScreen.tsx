@@ -5,10 +5,9 @@ import { reflectionsData } from '../data/reflections';
 
 interface ReflectionScreenProps {
   onSaveAndDownload: (reflections: Record<string, string>) => void;
-  onSkip: () => void;
 }
 
-export function ReflectionScreen({ onSaveAndDownload, onSkip }: ReflectionScreenProps) {
+export function ReflectionScreen({ onSaveAndDownload }: ReflectionScreenProps) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
 
   const handleAnswerChange = (questionId: number, value: string) => {
@@ -79,12 +78,6 @@ export function ReflectionScreen({ onSaveAndDownload, onSkip }: ReflectionScreen
           transition={{ delay: 0.6, duration: 0.6 }}
           className="flex flex-wrap justify-center gap-4"
         >
-          <Button
-            variant="secondary"
-            onClick={onSkip}
-          >
-            SKIP
-          </Button>
           <Button
             variant="primary"
             onClick={handleSave}

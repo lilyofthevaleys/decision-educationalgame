@@ -22,12 +22,6 @@ const characters: Character[] = [
     icon: '👨‍🏫',
   },
   {
-    id: 'mayor',
-    name: 'Mayor',
-    subtitle: "Running a city isn't a game... or is it?",
-    icon: '🏛️',
-  },
-  {
     id: 'entrepreneur',
     name: 'Entrepreneur',
     subtitle: 'Building empires, one choice at a time',
@@ -37,10 +31,9 @@ const characters: Character[] = [
 
 interface CharacterSelectionProps {
   onSelect: (characterId: string) => void;
-  onSkip: () => void;
 }
 
-export function CharacterSelection({ onSelect, onSkip }: CharacterSelectionProps) {
+export function CharacterSelection({ onSelect }: CharacterSelectionProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1A0933] via-[#2d1154] to-[#1A0933] flex items-center justify-center p-4">
       <div className="max-w-5xl w-full">
@@ -56,7 +49,7 @@ export function CharacterSelection({ onSelect, onSkip }: CharacterSelectionProps
           <div className="w-32 h-1 bg-[#00FF9F] mx-auto" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {characters.map((character, index) => (
             <motion.button
               key={character.id}
@@ -75,19 +68,7 @@ export function CharacterSelection({ onSelect, onSkip }: CharacterSelectionProps
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="text-center"
-        >
-          <button
-            onClick={onSkip}
-            className="text-gray-400 hover:text-white underline transition-colors duration-300"
-          >
-            Skip This Step
-          </button>
-        </motion.div>
+        
       </div>
     </div>
   );
