@@ -1,12 +1,29 @@
 import { motion } from 'motion/react';
 import { Button } from './Button';
-import { Sparkles, Zap, Brain } from 'lucide-react';
+import { Sparkles, Zap, Brain, DollarSign, Euro, PoundSterling, JapaneseYen, IndianRupee, Bitcoin } from 'lucide-react';
 
 interface LandingPageProps {
   onStart: () => void;
 }
 
 export function LandingPage({ onStart }: LandingPageProps) {
+  const glitchSquares = [
+    { id: 1, size: 60, x: '8%', y: '12%', duration: 4, delay: 0 },
+    { id: 2, size: 40, x: '18%', y: '30%', duration: 5, delay: 0.5 },
+    { id: 3, size: 90, x: '28%', y: '10%', duration: 4.5, delay: 1 },
+    { id: 4, size: 36, x: '38%', y: '36%', duration: 5.5, delay: 1.5 },
+    { id: 5, size: 72, x: '50%', y: '18%', duration: 4.8, delay: 2 },
+    { id: 6, size: 48, x: '60%', y: '34%', duration: 5.2, delay: 2.5 },
+    { id: 7, size: 84, x: '70%', y: '11%', duration: 4.3, delay: 3 },
+    { id: 8, size: 54, x: '80%', y: '28%', duration: 5.8, delay: 3.5 },
+    { id: 9, size: 40, x: '14%', y: '64%', duration: 4.6, delay: 0.8 },
+    { id: 10, size: 72, x: '26%', y: '72%', duration: 5.3, delay: 1.3 },
+    { id: 11, size: 44, x: '40%', y: '66%', duration: 4.9, delay: 1.8 },
+    { id: 12, size: 68, x: '54%', y: '70%', duration: 5.1, delay: 2.3 },
+    { id: 13, size: 52, x: '68%', y: '63%', duration: 4.7, delay: 2.8 },
+    { id: 14, size: 76, x: '82%', y: '68%', duration: 5.4, delay: 3.3 },
+  ];
+  const squares = glitchSquares.map((sq, i) => ({ ...sq, alpha: [0.22, 0.28, 0.35][i % 3] }));
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0118] via-[#1A0933] to-[#2d1154] flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated gradient orbs */}
@@ -68,14 +85,116 @@ export function LandingPage({ onStart }: LandingPageProps) {
         ))}
       </div>
 
-      {/* Grid pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `linear-gradient(#00FF9F 1px, transparent 1px), linear-gradient(90deg, #00FF9F 1px, transparent 1px)`,
-          backgroundSize: '50px 50px',
-        }}
-      />
+      {/* SVG grid overlay */}
+      <div className="absolute inset-0 opacity-10">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <pattern id="grid" width="5" height="5" patternUnits="userSpaceOnUse">
+              <path d="M 5 0 L 0 0 0 5" fill="none" stroke="#00FF9F" strokeOpacity="0.09" strokeWidth="0.2" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      {/* Glitch squares overlay (from Animate Elements) */}
+      <div className="absolute inset-0 pointer-events-none hidden md:block">
+        {squares.map((sq) => (
+          <div key={sq.id} className="absolute" style={{ left: sq.x, top: sq.y, width: sq.size, height: sq.size }}>
+            <motion.div
+              className="absolute"
+              style={{
+                width: '100%',
+                height: '100%',
+                background: `rgba(0,255,159,${sq.alpha})`,
+                boxShadow: `0 0 16px rgba(0,255,159,${sq.alpha}), 0 0 28px rgba(0,255,159,${Math.max(0, sq.alpha - 0.06)})`,
+              }}
+              animate={{
+                opacity: [0, Math.min(0.6, sq.alpha + 0.25), Math.min(0.5, sq.alpha + 0.15), sq.alpha, Math.min(0.5, sq.alpha + 0.15), 0],
+                scale: [0.9, 1, 1.02, 1],
+                x: [0, 3, -3, 0],
+                rotate: [0, 0, 2, 0],
+              }}
+              transition={{ duration: sq.duration, repeat: Infinity, ease: 'easeInOut', delay: sq.delay, times: [0, 0.2, 0.5, 1] }}
+            />
+            <motion.div
+              className="absolute"
+              style={{ width: '100%', height: '100%', background: `rgba(123,44,191,${Math.max(0.2, sq.alpha - 0.05)})`, mixBlendMode: 'screen' }}
+              animate={{ opacity: [0, Math.min(0.4, sq.alpha + 0.1), 0], x: [-4, -6, -4] }}
+              transition={{ duration: sq.duration, repeat: Infinity, ease: 'easeInOut', delay: sq.delay }}
+            />
+            <motion.div
+              className="absolute"
+              style={{ width: '100%', height: '100%', background: `rgba(0,255,159,${Math.max(0.2, sq.alpha - 0.05)})`, mixBlendMode: 'screen' }}
+              animate={{ opacity: [0, Math.min(0.4, sq.alpha + 0.1), 0], x: [4, 6, 4] }}
+              transition={{ duration: sq.duration, repeat: Infinity, ease: 'easeInOut', delay: sq.delay }}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute text-[#7B2CBF]"
+          style={{ left: '6%', top: '10%' }}
+          initial={{ opacity: 0.35, scale: 0.95 }}
+          animate={{ opacity: [0.35, 0.7, 0.35], rotate: [0, 8, -8, 0] }}
+          transition={{ duration: 7, repeat: Infinity }}
+        >
+          <DollarSign size={64} />
+        </motion.div>
+        <motion.div
+          className="absolute text-[#00FF9F]"
+          style={{ right: '7%', top: '14%' }}
+          initial={{ opacity: 0.3, scale: 0.9 }}
+          animate={{ opacity: [0.3, 0.65, 0.3], rotate: [0, -10, 10, 0] }}
+          transition={{ duration: 6.5, repeat: Infinity }}
+        >
+          <Euro size={68} />
+        </motion.div>
+        <motion.div
+          className="absolute text-[#00FF9F]"
+          style={{ left: '8%', top: '58%' }}
+          initial={{ opacity: 0.3 }}
+          animate={{ opacity: [0.3, 0.6, 0.3], rotate: [0, 6, -6, 0] }}
+          transition={{ duration: 6.8, repeat: Infinity }}
+        >
+          <PoundSterling size={56} />
+        </motion.div>
+        <motion.div
+          className="absolute text-[#7B2CBF]"
+          style={{ right: '8%', top: '62%' }}
+          initial={{ opacity: 0.35 }}
+          animate={{ opacity: [0.35, 0.7, 0.35], rotate: [0, -8, 8, 0] }}
+          transition={{ duration: 7.2, repeat: Infinity }}
+        >
+          <JapaneseYen size={56} />
+        </motion.div>
+        <motion.div
+          className="absolute text-[#00FF9F]"
+          style={{ left: '10%', bottom: '12%' }}
+          initial={{ opacity: 0.3 }}
+          animate={{ opacity: [0.3, 0.6, 0.3], rotate: [0, 6, -6, 0] }}
+          transition={{ duration: 6.2, repeat: Infinity }}
+        >
+          <IndianRupee size={64} />
+        </motion.div>
+        <motion.div
+          className="absolute text-[#7B2CBF]"
+          style={{ right: '10%', bottom: '12%' }}
+          initial={{ opacity: 0.35 }}
+          animate={{ opacity: [0.35, 0.7, 0.35], rotate: [0, -8, 8, 0] }}
+          transition={{ duration: 6.9, repeat: Infinity }}
+        >
+          <Bitcoin size={64} />
+        </motion.div>
+      </div>
 
       <div className="relative z-10 text-center max-w-4xl">
         <motion.div
@@ -161,8 +280,17 @@ export function LandingPage({ onStart }: LandingPageProps) {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="mb-6"
+            className="mb-6 relative"
           >
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 translate-y-6 w-[320px] h-[150px] md:w-[380px] md:h-[180px] rounded-full blur-2xl"
+              style={{
+                background:
+                  'radial-gradient(ellipse at center, rgba(0,255,159,0.35) 0%, rgba(0,255,159,0.15) 45%, rgba(0,255,159,0) 70%)',
+              }}
+              animate={{ opacity: [0.4, 0.7, 0.4] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
