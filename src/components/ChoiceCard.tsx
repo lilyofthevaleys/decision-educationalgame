@@ -2,7 +2,7 @@ import { ScoreImpact } from '../utils/scoreCalculations';
 import { motion } from 'motion/react';
 
 interface ChoiceCardProps {
-  option: 'A' | 'B' | 'C';
+  option: 'A' | 'B' | 'C' | 'D';
   text: string;
   impact: ScoreImpact;
   onClick: () => void;

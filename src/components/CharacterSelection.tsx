@@ -49,7 +49,7 @@ export function CharacterSelection({ onSelect }: CharacterSelectionProps) {
           <div className="w-32 h-1 bg-[#00FF9F] mx-auto" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div className="mb-8 flex flex-col items-center gap-6 md:flex-row md:flex-nowrap md:justify-center">
           {characters.map((character, index) => (
             <motion.button
               key={character.id}
@@ -57,7 +57,7 @@ export function CharacterSelection({ onSelect }: CharacterSelectionProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
               onClick={() => onSelect(character.id)}
-              className="group bg-black/40 backdrop-blur-sm rounded-xl p-6 border-2 border-transparent hover:border-[#00FF9F] transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,159,0.3)] hover:-translate-y-2"
+              className="w-full md:w-64 group bg-black/40 backdrop-blur-sm rounded-xl p-6 border-2 border-transparent hover:border-[#00FF9F] transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,159,0.3)] hover:-translate-y-2"
             >
               <div className="text-6xl mb-4">{character.icon}</div>
               <h3 className="text-white text-xl mb-2">{character.name}</h3>

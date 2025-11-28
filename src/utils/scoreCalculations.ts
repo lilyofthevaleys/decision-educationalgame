@@ -11,9 +11,9 @@ export interface ScoreImpact {
 }
 
 export const INITIAL_SCORES: Scores = {
-  integrity: 75,
-  trust: 70,
-  sustainability: 65,
+  integrity: 0,
+  trust: 0,
+  sustainability: 0,
 };
 
 export function updateScores(currentScores: Scores, impacts: ScoreImpact): Scores {

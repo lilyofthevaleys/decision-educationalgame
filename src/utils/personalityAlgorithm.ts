@@ -12,48 +12,31 @@ export interface Personality {
 
 export function determinePersonalityType(finalScores: Scores): Personality {
   const { integrity, trust, sustainability } = finalScores;
-
   let personalityId: string;
 
-  // High Integrity (80+)
-  if (integrity >= 80) {
-    if (trust >= 75) {
-      personalityId = 'idealist';
-    } else if (sustainability >= 70) {
-      personalityId = 'principled_loner';
-    } else {
-      personalityId = 'uncompromising_critic';
-    }
+  // TIER 1
+  if (integrity >= 80 && trust >= 80 && sustainability >= 80) {
+    personalityId = 'guardian';
+  } else if (integrity >= 80 && sustainability >= 80 && trust >= 60 && trust < 80) {
+    personalityId = 'crusader';
   }
-  // Medium-High Integrity (60-79)
-  else if (integrity >= 60) {
-    if (trust >= 70) {
-      personalityId = 'mediator';
-    } else if (sustainability >= 65) {
-      personalityId = 'pragmatic_reformist';
-    } else {
-      personalityId = 'realist';
-    }
+  // TIER 2
+  else if (integrity >= 60 && integrity < 80 && trust >= 80 && sustainability >= 60 && sustainability < 80) {
+    personalityId = 'diplomat';
+  } else if (integrity >= 60 && integrity < 80 && trust >= 60 && trust < 80 && sustainability >= 80) {
+    personalityId = 'architect';
   }
-  // Medium-Low Integrity (40-59)
-  else if (integrity >= 40) {
-    if (trust >= 60) {
-      personalityId = 'opportunist';
-    } else if (sustainability < 50) {
-      personalityId = 'short_term_thinker';
-    } else {
-      personalityId = 'conflicted';
-    }
+  // TIER 3
+  else if (integrity >= 60 && integrity < 80 && trust >= 40 && trust < 60 && sustainability >= 40 && sustainability < 60) {
+    personalityId = 'pragmatist';
+  } else if (integrity >= 40 && integrity < 60 && trust >= 40 && trust < 60 && sustainability >= 40 && sustainability < 60) {
+    personalityId = 'aspiring_changemaker';
   }
-  // Low Integrity (0-39)
-  else {
-    if (trust < 40) {
-      personalityId = 'corrupted_clown';
-    } else if (sustainability < 40) {
-      personalityId = 'desperate_survivor';
-    } else {
-      personalityId = 'lost';
-    }
+  // TIER 4
+  else if (integrity >= 40 && integrity < 60 && trust < 40 && sustainability < 40) {
+    personalityId = 'spectator';
+  } else {
+    personalityId = 'corruptor';
   }
 
   // Find and return the personality object
@@ -62,8 +45,7 @@ export function determinePersonalityType(finalScores: Scores): Personality {
   );
 
   if (!personality) {
-    // Fallback to realist if something goes wrong
-    return personalitiesData.personalities.find((p) => p.id === 'realist')!;
+    return personalitiesData.personalities.find((p) => p.id === 'pragmatist')!;
   }
 
   return personality as Personality;

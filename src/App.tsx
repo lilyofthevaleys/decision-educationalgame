@@ -9,7 +9,7 @@ import { ExitModal } from './components/ExitModal';
 import { INITIAL_SCORES, updateScores, type Scores } from './utils/scoreCalculations';
 import { determinePersonalityType, type Personality } from './utils/personalityAlgorithm';
 import { generateReflectionPDF } from './utils/pdfGenerator';
-import { scenariosData } from './data/scenarios';
+import { questionBank, type RoleQuestion } from './data/questionBank';
 
 type GameScreen =
   | 'landing'
@@ -64,11 +64,17 @@ function App() {
   };
 
   const handleStart = () => {
+    setCurrentScenarioIndex(0);
+    setScores(INITIAL_SCORES);
+    setPreviousScores(INITIAL_SCORES);
+    setChoices([]);
+    setPersonality(null);
     setCurrentScreen('character-selection');
   };
 
   const handleCharacterSelect = (characterId: string) => {
     setSelectedCharacter(characterId);
+    setCurrentScenarioIndex(0);
     setCurrentScreen('intro');
   };
 
@@ -83,8 +89,9 @@ function App() {
     consequence: string,
     impacts: { integrity: number; trust: number; sustainability: number }
   ) => {
-    const scenario = scenariosData.scenarios[currentScenarioIndex];
-    const choice = scenario.choices.find((c) => c.id === choiceId);
+    const roleKey = selectedCharacter as 'student' | 'teacher' | 'entrepreneur';
+    const scenario = questionBank.roles[roleKey][currentScenarioIndex];
+    const choice = scenario.choices.find((c) => c.id === (choiceId as any));
 
     if (!choice) return;
 
@@ -95,7 +102,7 @@ function App() {
     // Record choice
     const gameChoice: GameChoice = {
       scenarioId: scenario.id,
-      scenarioTitle: scenario.title,
+      scenarioTitle: `Question ${scenario.id}: ${scenario.text}`,
       choiceSelected: choiceId,
       choiceText: choice.text,
       impacts: impacts,
@@ -103,7 +110,8 @@ function App() {
     setChoices([...choices, gameChoice]);
 
     // Move to next scenario or results (skip consequence screen)
-    if (currentScenarioIndex < scenariosData.scenarios.length - 1) {
+    const totalScenarios = questionBank.roles[roleKey].length;
+    if (currentScenarioIndex < totalScenarios - 1) {
       // Move to next scenario
       setCurrentScenarioIndex(currentScenarioIndex + 1);
       setCurrentScreen('scenario');
@@ -116,7 +124,9 @@ function App() {
   };
 
   const handleContinueFromConsequence = () => {
-    if (currentScenarioIndex < scenariosData.scenarios.length - 1) {
+    const roleKey = selectedCharacter as 'student' | 'teacher' | 'entrepreneur';
+    const totalScenarios = questionBank.roles[roleKey].length;
+    if (currentScenarioIndex < totalScenarios - 1) {
       // Move to next scenario
       setCurrentScenarioIndex(currentScenarioIndex + 1);
       setCurrentScreen('scenario');
@@ -183,16 +193,11 @@ function App() {
     setShowExitModal(false);
   };
 
-  // Get current scenario with character context
-  const getCurrentScenario = () => {
-    const scenario = scenariosData.scenarios[currentScenarioIndex];
-    const contextText = scenario.character_context[selectedCharacter as keyof typeof scenario.character_context];
-    const fullDescription = `${contextText}. ${scenario.description}`;
-
-    return {
-      ...scenario,
-      description: fullDescription,
-    };
+  // Get current question for selected role
+  const getCurrentQuestion = () => {
+    const roleKey = selectedCharacter as 'student' | 'teacher' | 'entrepreneur';
+    const q = questionBank.roles[roleKey][currentScenarioIndex];
+    return q;
   };
 
   return (
@@ -213,10 +218,10 @@ function App() {
       {currentScreen === 'scenario' && (
         <ScenarioScreen
           scenarioNumber={currentScenarioIndex + 1}
-          totalScenarios={scenariosData.scenarios.length}
-          title={getCurrentScenario().title}
-          description={getCurrentScenario().description}
-          choices={getCurrentScenario().choices}
+          totalScenarios={questionBank.roles[selectedCharacter as 'student' | 'teacher' | 'entrepreneur'].length}
+          title={`Question ${currentScenarioIndex + 1}`}
+          description={getCurrentQuestion().text}
+          choices={getCurrentQuestion().choices.map((c) => ({ ...c, consequence: '' })) as any}
           onChoiceSelect={handleChoiceSelect}
           onExit={handleExit}
         />

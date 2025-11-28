@@ -194,7 +194,7 @@ export function ScenarioScreen({
               transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
             >
               <ChoiceCard
-                option={choice.id as 'A' | 'B' | 'C'}
+                option={choice.id as 'A' | 'B' | 'C' | 'D'}
                 text={choice.text}
                 impact={choice.impacts}
                 onClick={() => handleChoiceClick(choice)}
