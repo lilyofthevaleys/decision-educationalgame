@@ -10,6 +10,37 @@ import { INITIAL_SCORES, updateScores, type Scores } from './utils/scoreCalculat
 import { determinePersonalityType, type Personality } from './utils/personalityAlgorithm';
 import { generateReflectionPDF } from './utils/pdfGenerator';
 import { questionBank, type RoleQuestion } from './data/questionBank';
+// Build image maps for each role
+const studentMods = import.meta.glob('./images/student/*.{png,jpg,jpeg}', { eager: true, as: 'url' }) as Record<string, string>;
+const teacherMods = import.meta.glob('./images/teacher/*.{png,jpg,jpeg}', { eager: true, as: 'url' }) as Record<string, string>;
+const entrepreneurMods = import.meta.glob('./images/entrepreneur/*.{png,jpg,jpeg}', { eager: true, as: 'url' }) as Record<string, string>;
+
+const studentImageMap: Record<number, string> = Object.entries(studentMods).reduce((acc, [path, url]) => {
+  const base = path.split('/').pop() || '';
+  const numMatch = base.match(/(\d+)/);
+  if (numMatch) acc[parseInt(numMatch[1], 10)] = url;
+  return acc;
+}, {} as Record<number, string>);
+
+const teacherImageMap: Record<number, string> = Object.entries(teacherMods).reduce((acc, [path, url]) => {
+  const base = path.split('/').pop() || '';
+  const m = base.match(/q(\d+)_teach/i);
+  if (m) acc[parseInt(m[1], 10)] = url;
+  return acc;
+}, {} as Record<number, string>);
+
+const entrepreneurImageMap: Record<number, string> = Object.entries(entrepreneurMods).reduce((acc, [path, url]) => {
+  const base = path.split('/').pop() || '';
+  const m = base.match(/q(\d+)_ent/i);
+  if (m) acc[parseInt(m[1], 10)] = url;
+  return acc;
+}, {} as Record<number, string>);
+
+function getQuestionImage(role: 'student' | 'teacher' | 'entrepreneur', index1: number): string | undefined {
+  if (role === 'student') return studentImageMap[index1];
+  if (role === 'teacher') return teacherImageMap[index1];
+  if (role === 'entrepreneur') return entrepreneurImageMap[index1];
+}
 
 type GameScreen =
   | 'landing'
@@ -224,6 +255,7 @@ function App() {
           choices={getCurrentQuestion().choices.map((c) => ({ ...c, consequence: '' })) as any}
           onChoiceSelect={handleChoiceSelect}
           onExit={handleExit}
+          imageSrc={getQuestionImage(selectedCharacter as 'student' | 'teacher' | 'entrepreneur', currentScenarioIndex + 1)}
         />
       )}
 

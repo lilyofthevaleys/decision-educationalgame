@@ -23,6 +23,7 @@ interface ScenarioScreenProps {
   choices: Choice[];
   onChoiceSelect: (choiceId: string, consequence: string, impacts: any) => void;
   onExit: () => void;
+  imageSrc?: string;
 }
 
 export function ScenarioScreen({
@@ -33,6 +34,7 @@ export function ScenarioScreen({
   choices,
   onChoiceSelect,
   onExit,
+  imageSrc,
 }: ScenarioScreenProps) {
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
 
@@ -122,19 +124,27 @@ export function ScenarioScreen({
               repeat: Infinity,
             }}
           />
-          <motion.div
-            className="text-9xl relative z-10"
-            animate={{
-              scale: [1, 1.1, 1],
-              rotate: [0, 5, -5, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-            }}
-          >
-            <HelpCircle size={120} className="text-[#00FF9F] opacity-50" />
-          </motion.div>
+          {imageSrc ? (
+            <img
+              src={imageSrc}
+              alt="Scenario illustration"
+              className="absolute inset-0 w-full h-full object-cover rounded-3xl"
+            />
+          ) : (
+            <motion.div
+              className="text-9xl relative z-10"
+              animate={{
+                scale: [1, 1.1, 1],
+                rotate: [0, 5, -5, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+              }}
+            >
+              <HelpCircle size={120} className="text-[#00FF9F] opacity-50" />
+            </motion.div>
+          )}
         </motion.div>
 
         {/* Scenario Title with enhanced styling */}
