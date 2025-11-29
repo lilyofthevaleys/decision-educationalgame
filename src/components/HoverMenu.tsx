@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import { AudioSettingsModal } from './AudioSettingsModal';
+import { LanguageModal } from './LanguageModal';
 
 export function HoverMenu({ onNavigateArticles, onNavigateCredits }: { onNavigateArticles?: () => void; onNavigateCredits?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [showLanguage, setShowLanguage] = useState(false);
 
   const menuItems = ['Articles', 'Language', 'Settings', 'Credits'];
 
@@ -112,28 +114,32 @@ export function HoverMenu({ onNavigateArticles, onNavigateCredits }: { onNavigat
                       e.currentTarget.style.border = '1px solid rgba(255,255,255,0.12)';
                       e.currentTarget.style.background = 'rgba(0,0,0,0.35)';
                       e.currentTarget.style.boxShadow = 'none';
-                    }}
-                    onClick={() => {
-                      if (item === 'Articles' && onNavigateArticles) {
-                        onNavigateArticles();
-                        setIsOpen(false);
-                      } else if (item === 'Credits' && onNavigateCredits) {
-                        onNavigateCredits();
-                        setIsOpen(false);
-                      } else if (item === 'Settings') {
-                        setShowSettings(true);
-                        setIsOpen(false);
-                      }
-                    }}
-                  >
-                    {item}
-                  </motion.button>
-                ))}
+              }}
+                  onClick={() => {
+                    if (item === 'Articles' && onNavigateArticles) {
+                      onNavigateArticles();
+                      setIsOpen(false);
+                    } else if (item === 'Credits' && onNavigateCredits) {
+                      onNavigateCredits();
+                      setIsOpen(false);
+                    } else if (item === 'Settings') {
+                      setShowSettings(true);
+                      setIsOpen(false);
+                    } else if (item === 'Language') {
+                      setShowLanguage(true);
+                      setIsOpen(false);
+                    }
+                  }}
+                >
+                  {item}
+                </motion.button>
+              ))}
               </nav>
             </motion.div>
           )}
         </AnimatePresence>
         <AudioSettingsModal isOpen={showSettings} onClose={() => setShowSettings(false)} />
+        <LanguageModal isOpen={showLanguage} onClose={() => setShowLanguage(false)} />
       </div>
     </div>
   );
