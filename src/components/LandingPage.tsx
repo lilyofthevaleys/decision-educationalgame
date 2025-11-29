@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Button } from './Button';
+import { AudioManager } from '../audio/AudioManager';
 import { Sparkles, Zap, Brain, DollarSign, Euro, PoundSterling, JapaneseYen, IndianRupee, Bitcoin } from 'lucide-react';
 
 interface LandingPageProps {
@@ -297,7 +298,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
               <Button
                 variant="primary"
                 size="large"
-                onClick={onStart}
+                onClick={() => { AudioManager.play('start', { volume: 0.9 }); onStart(); }}
                 className="text-xl sm:text-2xl md:text-3xl px-12 py-4 sm:px-16 sm:py-6 rounded-2xl shadow-[0_0_30px_rgba(0,255,159,0.4)] hover:shadow-[0_0_50px_rgba(0,255,159,0.6)] transition-all duration-300 relative overflow-hidden group"
               >
                 <span className="relative z-10 font-bold tracking-wide">START GAME</span>

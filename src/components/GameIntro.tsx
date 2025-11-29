@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Button } from './Button';
+import { AudioManager } from '../audio/AudioManager';
 
 interface GameIntroProps {
   characterName: string;
@@ -117,7 +118,7 @@ export function GameIntro({ characterName, onBegin }: GameIntroProps) {
           <Button
             variant="primary"
             size="large"
-            onClick={onBegin}
+            onClick={() => { AudioManager.play('start', { volume: 0.9 }); onBegin(); }}
             className="text-xl px-16 animate-pulse"
           >
             BEGIN

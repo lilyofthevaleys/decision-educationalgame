@@ -1,5 +1,6 @@
 import { ScoreImpact } from '../utils/scoreCalculations';
 import { motion } from 'motion/react';
+import { AudioManager } from '../audio/AudioManager';
 
 interface ChoiceCardProps {
   option: 'A' | 'B' | 'C' | 'D';
@@ -20,7 +21,7 @@ export function ChoiceCard({
 }: ChoiceCardProps) {
   return (
     <motion.button
-      onClick={onClick}
+      onClick={() => { if (!disabled) { AudioManager.play('select'); } onClick(); }}
       disabled={disabled}
       whileHover={!disabled ? { scale: 1.02, x: 10 } : {}}
       whileTap={!disabled ? { scale: 0.98 } : {}}

@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
+import { AudioSettingsModal } from './AudioSettingsModal';
 
-export function HoverMenu({ onNavigateArticles }: { onNavigateArticles?: () => void }) {
+export function HoverMenu({ onNavigateArticles, onNavigateCredits }: { onNavigateArticles?: () => void; onNavigateCredits?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   const menuItems = ['Articles', 'Language', 'Settings', 'Credits'];
 
@@ -115,6 +117,12 @@ export function HoverMenu({ onNavigateArticles }: { onNavigateArticles?: () => v
                       if (item === 'Articles' && onNavigateArticles) {
                         onNavigateArticles();
                         setIsOpen(false);
+                      } else if (item === 'Credits' && onNavigateCredits) {
+                        onNavigateCredits();
+                        setIsOpen(false);
+                      } else if (item === 'Settings') {
+                        setShowSettings(true);
+                        setIsOpen(false);
                       }
                     }}
                   >
@@ -125,6 +133,7 @@ export function HoverMenu({ onNavigateArticles }: { onNavigateArticles?: () => v
             </motion.div>
           )}
         </AnimatePresence>
+        <AudioSettingsModal isOpen={showSettings} onClose={() => setShowSettings(false)} />
       </div>
     </div>
   );

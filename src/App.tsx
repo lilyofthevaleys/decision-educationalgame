@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArticlesPage } from './components/ArticlesPage';
+import { CreditsPage } from './components/CreditsPage';
 import { LandingPage } from './components/LandingPage';
 import { HoverMenu } from './components/HoverMenu';
 import { CharacterSelection } from './components/CharacterSelection';
@@ -12,6 +13,7 @@ import { INITIAL_SCORES, updateScores, type Scores } from './utils/scoreCalculat
 import { determinePersonalityType, type Personality } from './utils/personalityAlgorithm';
 import { generateReflectionPDF } from './utils/pdfGenerator';
 import { questionBank, type RoleQuestion } from './data/questionBank';
+import { AudioManager } from './audio/AudioManager';
 // Build image maps for each role
 const studentMods = import.meta.glob('./images/student/*.{png,jpg,jpeg}', { eager: true, as: 'url' }) as Record<string, string>;
 const teacherMods = import.meta.glob('./images/teacher/*.{png,jpg,jpeg}', { eager: true, as: 'url' }) as Record<string, string>;
@@ -51,7 +53,8 @@ type GameScreen =
   | 'scenario'
   | 'results'
   | 'reflection'
-  | 'articles';
+  | 'articles'
+  | 'credits';
 
 interface GameChoice {
   scenarioId: number;
@@ -84,6 +87,10 @@ function App() {
   const [showExitModal, setShowExitModal] = useState(false);
   const [sessionId] = useState(() => crypto.randomUUID());
   const [prevScreen, setPrevScreen] = useState<GameScreen | null>(null);
+
+  useEffect(() => {
+    AudioManager.playBGMFor(currentScreen);
+  }, [currentScreen]);
 
   const resetGame = () => {
     setCurrentScreen('landing');
@@ -229,6 +236,16 @@ function App() {
     setPrevScreen(null);
   };
 
+  const handleOpenCredits = () => {
+    setPrevScreen(currentScreen);
+    setCurrentScreen('credits');
+  };
+
+  const handleBackFromCredits = () => {
+    setCurrentScreen(prevScreen ?? 'landing');
+    setPrevScreen(null);
+  };
+
   const handleConfirmExit = () => {
     resetGame();
     setShowExitModal(false);
@@ -247,7 +264,7 @@ function App() {
 
   return (
     <>
-      {currentScreen === 'landing' && <HoverMenu onNavigateArticles={handleOpenArticles} />}
+      {currentScreen === 'landing' && <HoverMenu onNavigateArticles={handleOpenArticles} onNavigateCredits={handleOpenCredits} />}
       {currentScreen === 'landing' && <LandingPage onStart={handleStart} />}
 
       {currentScreen === 'character-selection' && (
@@ -283,7 +300,7 @@ function App() {
             onDownloadPDF={handleDownloadPDF}
             onReflect={handleReflect}
           />
-          <HoverMenu onNavigateArticles={handleOpenArticles} />
+          <HoverMenu onNavigateArticles={handleOpenArticles} onNavigateCredits={handleOpenCredits} />
         </>
       )}
 
@@ -295,6 +312,10 @@ function App() {
 
       {currentScreen === 'articles' && (
         <ArticlesPage onBack={handleBackFromArticles} />
+      )}
+
+      {currentScreen === 'credits' && (
+        <CreditsPage onBack={handleBackFromCredits} />
       )}
 
       <ExitModal
