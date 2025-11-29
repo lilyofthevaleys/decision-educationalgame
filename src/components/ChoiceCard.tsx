@@ -62,7 +62,7 @@ export function ChoiceCard({
           </motion.div>
         </div>
         <div className="flex-1 flex items-center">
-          <p className="text-white text-lg leading-relaxed">{text}</p>
+          <p className="text-white text-base sm:text-lg leading-relaxed">{text}</p>
         </div>
       </div>
 

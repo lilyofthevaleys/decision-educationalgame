@@ -227,7 +227,6 @@ export function LandingPage({ onStart }: LandingPageProps) {
             </motion.div>
           </div>
 
-          {/* Logo with enhanced styling */}
           <div className="mb-8 mt-16">
             <motion.h1
               className="text-7xl md:text-8xl lg:text-9xl mb-4 relative"
@@ -266,7 +265,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <p className="text-white text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight">
+            <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight">
               Every choice shapes{' '}
               <span className="text-[#00FF9F] font-semibold drop-shadow-[0_0_10px_rgba(0,255,159,0.5)]">
                 who you are

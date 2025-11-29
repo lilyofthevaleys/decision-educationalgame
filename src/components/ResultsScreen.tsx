@@ -135,7 +135,7 @@ export function ResultsScreen({
           >
             <Sparkles className="text-[#00FF9F] w-12 h-12 mx-auto" />
           </motion.div>
-          <h1 className="text-[#00FF9F] text-5xl md:text-6xl lg:text-7xl mb-4 drop-shadow-[0_0_30px_rgba(0,255,159,0.6)] tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <h1 className="text-[#00FF9F] text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-4 drop-shadow-[0_0_30px_rgba(0,255,159,0.6)] tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
             YOU ARE: {personality.title.toUpperCase()}
           </h1>
           <motion.div
@@ -158,7 +158,7 @@ export function ResultsScreen({
           className="flex justify-center mb-12"
         >
           <motion.div
-            className="text-9xl relative"
+            className="text-6xl sm:text-8xl md:text-9xl relative"
             animate={{
               y: [0, -20, 0],
             }}
@@ -292,15 +292,15 @@ export function ResultsScreen({
               Your choices reflected your values in complex situations where there's often no perfect answer.
             </p>
             
-            <div className="flex justify-center gap-8 mt-8">
-              <div className="text-center">
+            <div className="flex flex-row justify-center items-start gap-8 mt-8 mx-auto">
+              <div className="text-center w-32">
                 <div className="w-24 h-24 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3 border border-white/20 mx-auto">
                   <span className="text-4xl">📚</span>
                 </div>
                 <p className="text-[#00FF9F] mb-2">SDG 4</p>
                 <p className="text-gray-400 text-sm">Quality Education</p>
               </div>
-              <div className="text-center">
+              <div className="text-center w-32">
                 <div className="w-24 h-24 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3 border border-white/20 mx-auto">
                   <span className="text-4xl">⚖️</span>
                 </div>

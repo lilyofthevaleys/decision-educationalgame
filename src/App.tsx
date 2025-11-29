@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { LandingPage } from './components/LandingPage';
+import { HoverMenu } from './components/HoverMenu';
 import { CharacterSelection } from './components/CharacterSelection';
 import { GameIntro } from './components/GameIntro';
 import { ScenarioScreen } from './components/ScenarioScreen';
@@ -233,6 +234,7 @@ function App() {
 
   return (
     <>
+      {currentScreen === 'landing' && <HoverMenu />}
       {currentScreen === 'landing' && <LandingPage onStart={handleStart} />}
 
       {currentScreen === 'character-selection' && (
@@ -260,13 +262,16 @@ function App() {
       )}
 
       {currentScreen === 'results' && personality && (
-        <ResultsScreen
-          personality={personality}
-          finalScores={scores}
-          onPlayAgain={handlePlayAgain}
-          onDownloadPDF={handleDownloadPDF}
-          onReflect={handleReflect}
-        />
+        <>
+          <ResultsScreen
+            personality={personality}
+            finalScores={scores}
+            onPlayAgain={handlePlayAgain}
+            onDownloadPDF={handleDownloadPDF}
+            onReflect={handleReflect}
+          />
+          <HoverMenu />
+        </>
       )}
 
       {currentScreen === 'reflection' && (
