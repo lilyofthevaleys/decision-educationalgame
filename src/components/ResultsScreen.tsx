@@ -4,7 +4,7 @@ import { Button } from './Button';
 import { ScoreBar } from './ScoreBar';
 import { Personality } from '../utils/personalityAlgorithm';
 import { Scores } from '../utils/scoreCalculations';
-import { Sparkles, Download, RefreshCw, FileText } from 'lucide-react';
+import { Sparkles, Download, RefreshCw, FileText, X } from 'lucide-react';
 
 interface ResultsScreenProps {
   personality: Personality;
@@ -12,6 +12,7 @@ interface ResultsScreenProps {
   onPlayAgain: () => void;
   onDownloadPDF: () => void;
   onReflect: () => void;
+  onNavigateArticles: () => void;
 }
 
 export function ResultsScreen({
@@ -20,9 +21,11 @@ export function ResultsScreen({
   onPlayAgain,
   onDownloadPDF,
   onReflect,
+  onNavigateArticles,
 }: ResultsScreenProps) {
   const [loading, setLoading] = useState(true);
   const [showResults, setShowResults] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
 
   useEffect(() => {
     // Show loading for 2 seconds
@@ -135,13 +138,42 @@ export function ResultsScreen({
       />
 
       <div className="max-w-5xl mx-auto py-8 relative z-10">
+        {showBanner && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="mb-6"
+          >
+            <div className="flex items-center justify-between gap-4 bg-black/60 backdrop-blur-sm border border-[#00FF9F]/40 rounded-lg px-4 py-3">
+              <div className="text-white text-sm md:text-base">
+                <span className="font-semibold text-[#00FF9F]">9 December:</span> International Anti-corruption month —{' '}
+                <button
+                  type="button"
+                  onClick={onNavigateArticles}
+                  className="underline text-[#00FF9F] hover:text-white transition-colors"
+                >
+                  click here to see articles
+                </button>
+              </div>
+              <button
+                type="button"
+                aria-label="Dismiss banner"
+                onClick={() => setShowBanner(false)}
+                className="text-white/70 hover:text-white"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
         {/* Personality Type */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: showResults ? 1 : 0, y: showResults ? 0 : -20 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
-        >
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: showResults ? 1 : 0, y: showResults ? 0 : -20 }}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-12"
+      >
           <motion.div
             className="inline-block mb-4"
             animate={{

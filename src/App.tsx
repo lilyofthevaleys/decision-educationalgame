@@ -299,6 +299,7 @@ function App() {
             onPlayAgain={handlePlayAgain}
             onDownloadPDF={handleDownloadPDF}
             onReflect={handleReflect}
+            onNavigateArticles={handleOpenArticles}
           />
           <HoverMenu onNavigateArticles={handleOpenArticles} onNavigateCredits={handleOpenCredits} />
         </>

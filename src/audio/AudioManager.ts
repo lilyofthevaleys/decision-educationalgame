@@ -8,6 +8,7 @@ const bgmUrl = new URL('../../Kevin MacLeod - Itty Bitty 8 Bit.mp3', import.meta
 const nightShadeUrl = new URL('../../AdhesiveWombat - Night Shade.mp3', import.meta.url).href;
 const powerupUrl = new URL('../../Jeremy Blake - Powerup!.mp3', import.meta.url).href;
 const virtualBoyUrl = new URL('../../Krayzius & Brainstorm - Virtual Boy.mp3', import.meta.url).href;
+const creditsUrl = new URL('../../AERØHEAD feat. Idyllic - Sanctuary.mp3', import.meta.url).href;
 
 const sounds: Record<string, HTMLAudioElement> = {
   select: new Audio(sfxUrl),
@@ -50,6 +51,7 @@ export const AudioManager = {
       if (s === 'scenario') return bgmUrl;
       if (s === 'results' || s === 'reflection') return powerupUrl;
       if (s === 'articles') return virtualBoyUrl;
+      if (s === 'credits') return creditsUrl;
       return null;
     };
 
