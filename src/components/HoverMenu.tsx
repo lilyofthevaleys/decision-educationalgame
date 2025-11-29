@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 
-export function HoverMenu() {
+export function HoverMenu({ onNavigateArticles }: { onNavigateArticles?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = ['Articles', 'Language', 'Settings', 'Credits'];
@@ -22,6 +22,7 @@ export function HoverMenu() {
         style={{ cursor: 'pointer' }}
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
+        onClick={() => setIsOpen((v) => !v)}
       >
         {/* Hamburger Icon */}
         <div 
@@ -53,52 +54,72 @@ export function HoverMenu() {
                 position: 'absolute',
                 top: '64px',
                 right: '0',
-                backgroundColor: '#111827',
                 borderRadius: '16px',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
                 padding: '24px',
-                minWidth: '200px',
-                border: '1px solid #374151'
+                minWidth: '220px',
+                border: '2px solid rgba(0,255,159,0.35)',
+                background: 'radial-gradient(1200px 1200px at 10% 10%, rgba(0,255,159,0.14) 0%, rgba(0,255,159,0.06) 20%, rgba(10,1,24,0.92) 60%), radial-gradient(1000px 1000px at 90% 10%, rgba(123,44,191,0.12) 0%, rgba(123,44,191,0.05) 25%, rgba(10,1,24,0.92) 60%), linear-gradient(180deg, rgba(26,9,51,0.96) 0%, rgba(10,1,24,0.96) 100%)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                boxShadow:
+                  '0 0 0 1px rgba(123,44,191,0.35), 0 10px 24px rgba(0,0,0,0.5), 0 0 24px rgba(0,255,159,0.25)',
+                overflow: 'hidden'
               }}
             >
-              {/* Close button */}
-              <button
+              <div
                 style={{
                   position: 'absolute',
-                  top: '16px',
-                  right: '16px',
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  color: 'white',
-                  cursor: 'pointer',
-                  padding: '4px'
+                  inset: 0,
+                  pointerEvents: 'none',
+                  backgroundImage:
+                    'linear-gradient(rgba(0, 255, 159, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 159, 0.06) 1px, transparent 1px)',
+                  backgroundSize: '30px 30px',
+                  opacity: 0.4
                 }}
-                onClick={() => setIsOpen(false)}
-              >
-                <X size={20} />
-              </button>
-
+              />
               {/* Menu items */}
-              <nav style={{ marginTop: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <nav style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '12px', padding: '4px' }}>
                 {menuItems.map((item, index) => (
-                  <motion.a
+                  <motion.button
                     key={item}
-                    href="#"
+                    type="button"
                     style={{
                       display: 'block',
+                      width: '100%',
                       color: 'white',
                       textAlign: 'center',
                       fontSize: '14px',
-                      textDecoration: 'none'
+                      background: 'rgba(0,0,0,0.35)',
+                      border: '1px solid rgba(255,255,255,0.12)',
+                      borderRadius: '12px',
+                      padding: '14px 16px',
+                      cursor: 'pointer'
                     }}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = '#2dd4bf')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'white')}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = '#00FF9F';
+                      e.currentTarget.style.border = '1px solid rgba(0,255,159,0.6)';
+                      e.currentTarget.style.background =
+                        'linear-gradient(135deg, rgba(0,255,159,0.18), rgba(123,44,191,0.16))';
+                      e.currentTarget.style.boxShadow = '0 0 16px rgba(0,255,159,0.35)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'white';
+                      e.currentTarget.style.border = '1px solid rgba(255,255,255,0.12)';
+                      e.currentTarget.style.background = 'rgba(0,0,0,0.35)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                    onClick={() => {
+                      if (item === 'Articles' && onNavigateArticles) {
+                        onNavigateArticles();
+                        setIsOpen(false);
+                      }
+                    }}
                   >
                     {item}
-                  </motion.a>
+                  </motion.button>
                 ))}
               </nav>
             </motion.div>

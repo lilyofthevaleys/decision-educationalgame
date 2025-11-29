@@ -51,7 +51,7 @@ export function ScenarioScreen({
     // Wait a moment for visual feedback, then proceed
     setTimeout(() => {
       onChoiceSelect(choice.id, choice.consequence, choice.impacts);
-    }, 500);
+    }, 650);
   };
 
   return (
@@ -152,13 +152,13 @@ export function ScenarioScreen({
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-center mb-8"
+          className="text-center mb-8 md:mb-12"
         >
-          <h2 className="text-[#00FF9F] text-4xl md:text-5xl mb-4 drop-shadow-[0_0_20px_rgba(0,255,159,0.5)] tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <h2 className="text-[#00FF9F] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-4 md:mb-6 drop-shadow-[0_0_20px_rgba(0,255,159,0.5)] tracking-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
             {title}
           </h2>
           <motion.div
-            className="w-64 h-1 mx-auto rounded-full"
+            className="w-48 sm:w-64 md:w-80 h-1 mx-auto rounded-full"
             style={{
               background: 'linear-gradient(90deg, transparent, #00FF9F, transparent)',
             }}
@@ -200,8 +200,12 @@ export function ScenarioScreen({
             <motion.div
               key={choice.id}
               initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
+              animate={
+                selectedChoice && selectedChoice !== choice.id
+                  ? { opacity: 0.45, scale: 0.98 }
+                  : { opacity: 1, x: 0, scale: 1 }
+              }
+              transition={{ delay: 0.6 + index * 0.1, duration: 0.35, ease: 'easeOut' }}
             >
               <ChoiceCard
                 option={choice.id as 'A' | 'B' | 'C' | 'D'}

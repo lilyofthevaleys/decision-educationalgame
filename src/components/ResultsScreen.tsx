@@ -87,6 +87,16 @@ export function ResultsScreen({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0118] via-[#1A0933] to-[#2d1154] p-4 md:p-8 overflow-y-auto relative">
+      <div className="fixed inset-0 pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(0, 255, 159, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 159, 0.05) 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
+          }}
+        />
+      </div>
       {/* Animated background orbs */}
       <motion.div
         className="absolute w-96 h-96 bg-[#00FF9F]/10 rounded-full blur-3xl"
@@ -113,6 +123,15 @@ export function ResultsScreen({
           ease: 'easeInOut',
         }}
         style={{ bottom: '10%', right: '5%' }}
+      />
+      <motion.div
+        className="absolute w-[500px] h-[500px] bg-[#FFD700]/8 rounded-full blur-[150px]"
+        animate={{
+          scale: [1, 1.05, 1],
+          opacity: [0.15, 0.25, 0.15],
+        }}
+        transition={{ duration: 6, repeat: Infinity }}
+        style={{ bottom: '-8%', left: '30%' }}
       />
 
       <div className="max-w-5xl mx-auto py-8 relative z-10">

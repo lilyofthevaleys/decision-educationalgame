@@ -196,14 +196,14 @@ export function LandingPage({ onStart }: LandingPageProps) {
         </motion.div>
       </div>
 
-      <div className="relative z-10 text-center max-w-4xl">
+      <div className="relative z-10 text-center max-w-4xl px-4">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Floating icons */}
-          <div className="relative mb-8">
+          {/* Floating icons - Hidden on mobile */}
+          <div className="relative mb-8 hidden sm:block">
             <motion.div
               className="absolute left-0 top-0 text-[#00FF9F]"
               animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
@@ -227,9 +227,9 @@ export function LandingPage({ onStart }: LandingPageProps) {
             </motion.div>
           </div>
 
-          <div className="mb-8 mt-16">
+          <div className="mb-8 mt-12 sm:mt-16">
             <motion.h1
-              className="text-7xl md:text-8xl lg:text-9xl mb-4 relative"
+              className="text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[12rem] mb-4 relative"
               style={{ fontFamily: 'Space Grotesk, sans-serif' }}
               animate={{ 
                 textShadow: [
@@ -240,9 +240,9 @@ export function LandingPage({ onStart }: LandingPageProps) {
               }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <span className="text-[#00FF9F] drop-shadow-[0_0_15px_rgba(0,255,159,0.5)]">Deci</span>
-              <span className="text-[#7B2CBF] drop-shadow-[0_0_15px_rgba(123,44,191,0.5)] text-8xl md:text-9xl lg:text-[10rem]">$</span>
-              <span className="text-[#00FF9F] drop-shadow-[0_0_15px_rgba(0,255,159,0.5)]">ion</span>
+              <span className="text-[#00FF9F] drop-shadow-[0_0_15px_rgba(0,255,159,0.5)] text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[12rem]">Deci</span>
+              <span className="text-[#7B2CBF] drop-shadow-[0_0_15px_rgba(123,44,191,0.5)] text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] 2xl:text-[14rem]">$</span>
+              <span className="text-[#00FF9F] drop-shadow-[0_0_15px_rgba(0,255,159,0.5)] text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[12rem]">ion</span>
             </motion.h1>
             
             {/* Subtitle line with gradient */}
@@ -260,12 +260,12 @@ export function LandingPage({ onStart }: LandingPageProps) {
 
           {/* Tagline with better typography */}
           <motion.div
-            className="mb-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
+            className="mb-16 md:mb-20 lg:mb-24"
           >
-            <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight">
+            <p className="text-white text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl leading-tight tracking-tight">
               Every choice shapes{' '}
               <span className="text-[#00FF9F] font-semibold drop-shadow-[0_0_10px_rgba(0,255,159,0.5)]">
                 who you are
@@ -282,7 +282,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
             className="mb-6 relative"
           >
             <motion.div
-              className="absolute left-1/2 -translate-x-1/2 translate-y-6 w-[320px] h-[150px] md:w-[380px] md:h-[180px] rounded-full blur-2xl"
+              className="absolute left-1/2 -translate-x-1/2 translate-y-6 w-[280px] h-[120px] sm:w-[320px] sm:h-[150px] md:w-[380px] md:h-[180px] rounded-full blur-2xl"
               style={{
                 background:
                   'radial-gradient(ellipse at center, rgba(0,255,159,0.35) 0%, rgba(0,255,159,0.15) 45%, rgba(0,255,159,0) 70%)',
@@ -298,7 +298,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
                 variant="primary"
                 size="large"
                 onClick={onStart}
-                className="text-2xl px-16 py-6 rounded-2xl shadow-[0_0_30px_rgba(0,255,159,0.4)] hover:shadow-[0_0_50px_rgba(0,255,159,0.6)] transition-all duration-300 relative overflow-hidden group"
+                className="text-xl sm:text-2xl md:text-3xl px-12 py-4 sm:px-16 sm:py-6 rounded-2xl shadow-[0_0_30px_rgba(0,255,159,0.4)] hover:shadow-[0_0_50px_rgba(0,255,159,0.6)] transition-all duration-300 relative overflow-hidden group"
               >
                 <span className="relative z-10 font-bold tracking-wide">START GAME</span>
                 <motion.div

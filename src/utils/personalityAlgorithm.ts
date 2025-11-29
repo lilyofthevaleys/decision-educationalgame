@@ -26,6 +26,14 @@ export function determinePersonalityType(finalScores: Scores): Personality {
   } else if (integrity >= 60 && integrity < 80 && trust >= 60 && trust < 80 && sustainability >= 80) {
     personalityId = 'architect';
   }
+  // TIER 2 fallback: all dimensions in 60–79 range (no single 80+)
+  else if (
+    integrity >= 60 && integrity < 80 &&
+    trust >= 60 && trust < 80 &&
+    sustainability >= 60 && sustainability < 80
+  ) {
+    personalityId = trust >= sustainability ? 'diplomat' : 'architect';
+  }
   // TIER 3
   else if (integrity >= 60 && integrity < 80 && trust >= 40 && trust < 60 && sustainability >= 40 && sustainability < 60) {
     personalityId = 'pragmatist';

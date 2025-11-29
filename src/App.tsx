@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ArticlesPage } from './components/ArticlesPage';
 import { LandingPage } from './components/LandingPage';
 import { HoverMenu } from './components/HoverMenu';
 import { CharacterSelection } from './components/CharacterSelection';
@@ -49,7 +50,8 @@ type GameScreen =
   | 'intro'
   | 'scenario'
   | 'results'
-  | 'reflection';
+  | 'reflection'
+  | 'articles';
 
 interface GameChoice {
   scenarioId: number;
@@ -81,6 +83,7 @@ function App() {
   const [personality, setPersonality] = useState<Personality | null>(null);
   const [showExitModal, setShowExitModal] = useState(false);
   const [sessionId] = useState(() => crypto.randomUUID());
+  const [prevScreen, setPrevScreen] = useState<GameScreen | null>(null);
 
   const resetGame = () => {
     setCurrentScreen('landing');
@@ -216,6 +219,16 @@ function App() {
     setShowExitModal(true);
   };
 
+  const handleOpenArticles = () => {
+    setPrevScreen(currentScreen);
+    setCurrentScreen('articles');
+  };
+
+  const handleBackFromArticles = () => {
+    setCurrentScreen(prevScreen ?? 'landing');
+    setPrevScreen(null);
+  };
+
   const handleConfirmExit = () => {
     resetGame();
     setShowExitModal(false);
@@ -234,7 +247,7 @@ function App() {
 
   return (
     <>
-      {currentScreen === 'landing' && <HoverMenu />}
+      {currentScreen === 'landing' && <HoverMenu onNavigateArticles={handleOpenArticles} />}
       {currentScreen === 'landing' && <LandingPage onStart={handleStart} />}
 
       {currentScreen === 'character-selection' && (
@@ -270,7 +283,7 @@ function App() {
             onDownloadPDF={handleDownloadPDF}
             onReflect={handleReflect}
           />
-          <HoverMenu />
+          <HoverMenu onNavigateArticles={handleOpenArticles} />
         </>
       )}
 
@@ -278,6 +291,10 @@ function App() {
         <ReflectionScreen
           onSaveAndDownload={handleSaveReflections}
         />
+      )}
+
+      {currentScreen === 'articles' && (
+        <ArticlesPage onBack={handleBackFromArticles} />
       )}
 
       <ExitModal
